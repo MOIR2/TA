@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Penyakit Buah Jeruk Manis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            max-width: 400px;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: calc(100% - 22px); /* Menyesuaikan lebar input */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header, .footer {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .header h1, .footer h3 {
+            margin: 0;
+        }
+
+        .content {
+            text-align: left;
+        }
+
+        .content h2 {
+            color: #4CAF50;
+        }
+
+        .content p {
+            line-height: 1.6;
+        }
+
+        .uploaded-image {
+            max-width: 200px;
+            height: auto;
+            margin: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image-item {
+            margin: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to My Website</h1>
+    </div>
+
+    <div class="container">
+        <h1>Deteksi Penyakit Buah Jeruk Manis</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input type="file" name="images" multiple required>
+            <button type="submit">Unggah Gambar</button>
+        </form>
+        {% if predictions %}
+        <div class="image-container">
+            {% for image_url, prediction in predictions %}
+            <div class="image-item">
+                <img src="{{ image_url }}" alt="Uploaded Image" class="uploaded-image">
+                <h2>{{ prediction }}</h2>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="content">
+            <h2>About This Project</h2>
+            <p>This project aims to help farmers and agricultural experts to detect diseases in sweet orange fruits using image processing and machine learning techniques.</p>
+
+            <h2>How It Works</h2>
+            <p>Simply upload images of the orange fruits, and our system will analyze them to determine if there are any signs of disease. The results will be displayed instantly.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>&copy; 2024 My Website</h3>
+    </div>
+</body>
+</html>
